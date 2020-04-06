@@ -1,18 +1,29 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+<template lang="pug">
+  #app
+    Header
+    router-view
+    Footer
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Buscador from "./components/Buscador.vue";
+import Footer from "../src/components/layouts/Footer";
+import Header from "../src/components/layouts/Header";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Buscador,
+    Footer,
+    Header
+  },
+  data() {
+    return {};
   }
+
+  //created() {
+  //alert('hello Derek');
+  //}
 };
 </script>
 
@@ -23,6 +34,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.red {
+  background-color: red;
+  font-size: 45px;
+  padding: 16px;
+}
+
+.green {
+  background-color: green;
+  font-size: 45px;
+  padding: 16px;
 }
 </style>

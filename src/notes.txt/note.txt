@@ -1,0 +1,97 @@
+<template lang="pug">
+  #app
+    input(v-model="name")
+    br
+    label {{ name }}
+    br
+    a(:href="name") GO
+    h2 Has Click sobre el mono para ver varias páginas de prueba
+    span(@click="watchListOFlinks" :class="listOFlinks ? 'red' : 'green'") {{ listOFlinks ? '🙉' : '🙈'}}
+    ul(style="list-style: none;" v-show="listOFlinks")
+      li(v-for="i in listLinks" @click="valueInput(i.jw)") {{ i.jw }}
+      li(v-for="i in listLinks" @click="valueInput(i.facebook)") {{ i.facebook }}
+      li(v-for="i in listLinks" @click="valueInput(i.youtube)") {{ i.youtube }}
+      li(v-for="i in listLinks" @click="valueInput(i.google)") {{ i.google }}
+    br
+    br
+    br
+    input(v-model="yourYear" placeholder="escribe el año en el que naciste" type="number")
+    input(v-model="yourMonth" placeholder="escribe el mes en el que naciste" type="number")
+    input(v-model="yourDay" placeholder="escribe el día en el que naciste" type="number")
+    br
+    p {{ FullName }}
+    p {{ x }}
+</template>
+
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+  data() {
+    return {
+      name: '',
+      yourYear: '',
+      yourMonth: '',
+      yourDay: '',
+      x: '',
+      url:'http://jw.org',
+      listLinks: [{ jw:'https://jw.org', facebook:'https://facebook.com', youtube:'https://youtube.com', google:'https://google.com' }],
+      listOFlinks: false
+    }
+  },
+
+  computed: {
+    FullName() {
+      if(this.yourYear === '' && this.yourMonth === '' && this.yourDay === '') {
+          return 'NO HAS REGISTRADO TU FECHA DE NACIMIENTO COMPLETA';
+      } else if(this.yourAge <= 0) {
+          return 'NO HAS REGISTRADO TU EDAD EN UN FORMATO VALIDO';
+      }
+      let resultYear = 2020 - this.yourYear;
+      return `TU EDAD ES: ${resultYear}`;
+    }
+  },
+
+  watch: {
+    name(newVal, oldVal) {
+      this.x += `Soy nuevo: ${newVal} || Era viejo ${oldVal}<br>`;
+    }
+  },
+
+  methods: {
+    watchListOFlinks() {
+      this.listOFlinks = !this.listOFlinks;
+    },
+    valueInput(key) {
+      this.name = key;
+    }
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+.red {
+  background-color: red;
+  font-size: 45px;
+  padding: 16px;
+}
+
+.green {
+  background-color: green;
+  font-size: 45px;
+  padding: 16px;
+}
+</style>
